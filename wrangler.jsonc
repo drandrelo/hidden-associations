@@ -2,6 +2,12 @@
   "$schema": "node_modules/wrangler/config-schema.json",
   "name": "hidden-associations",
   "compatibility_date": "2026-09-18",
+  // Runs automatically before `wrangler deploy` bundles anything, so the
+  // Cloudflare dashboard's own Build command setting doesn't matter — this
+  // is what actually produces .cf-dist below.
+  "build": {
+    "command": "npm run build:cloudflare"
+  },
   // The Worker only serves static assets — no server-side code needed.
   "assets": {
     // Built by `npm run build:cloudflare`, which nests the Vite output under
