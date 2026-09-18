@@ -25,6 +25,18 @@ export function LandingPage({ onStart, onClearSession, sessionClearedNotice }: L
       )}
 
       <h1 className="text-[clamp(2.25rem,9vw,3.5rem)] leading-none font-semibold text-ink">{landing.heading}</h1>
+      <h2 className="mt-1 text-sm text-muted">
+        Built by{' '}
+        <a
+          href="https://drandrelo.com"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="font-semibold text-ink underline decoration-signal decoration-2 underline-offset-4 hover:text-signal"
+        >
+          Dr Andre Lo
+          <span className="sr-only"> (opens in a new tab)</span>
+        </a>
+      </h2>
       <p className="mt-4 text-xl leading-snug text-ink-soft">{landing.subtitle}</p>
       <p className="mt-5 text-base leading-relaxed text-muted">{landing.intro}</p>
 

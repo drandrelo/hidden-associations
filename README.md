@@ -346,6 +346,19 @@ test suite, so `.github/workflows/ci.yml` covers pull requests.
 
 Build command `npm run build`, publish directory `dist`. No other configuration is needed.
 
+### Cloudflare Workers
+
+Serves at `drandrelo.com/hiddenassociations`, as a Worker with no server-side code — `wrangler.jsonc`
+configures it to serve static assets only. Since the Worker's asset lookup maps the request pathname
+straight onto the assets directory with no prefix stripping, the build has to land under a
+`hiddenassociations/` folder rather than at the assets root: `npm run build:cloudflare` runs the normal
+build and then copies `dist/` into `.cf-dist/hiddenassociations/`, which is what `wrangler.jsonc` points at.
+
+Set the Cloudflare Workers Build configuration (Git integration) to run `npm run build:cloudflare` — not
+the default `npm run build` — or every asset request will 404. `drandrelo.com` must already be an active
+zone on the same Cloudflare account for the routes in `wrangler.jsonc` to attach. To deploy manually:
+`npm run build:cloudflare && npm run deploy`.
+
 ## Design notes
 
 Type is Aptos with a system fallback stack. Colour is Slate Grey `#282D37` with Signal Orange `#FF6223` as

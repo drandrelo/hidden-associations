@@ -1,0 +1,20 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "hidden-associations",
+  "compatibility_date": "2026-09-18",
+  // The Worker only serves static assets — no server-side code needed.
+  "assets": {
+    // Built by `npm run build:cloudflare`, which nests the Vite output under
+    // hiddenassociations/ so it lines up with the URL path below: asset
+    // lookups map the request pathname straight onto this directory, with no
+    // prefix stripping.
+    "directory": "./.cf-dist",
+    "not_found_handling": "404-page"
+  },
+  // drandrelo.com must already be an active zone on this Cloudflare account
+  // for these routes to attach.
+  "routes": [
+    { "pattern": "drandrelo.com/hiddenassociations", "zone_name": "drandrelo.com" },
+    { "pattern": "drandrelo.com/hiddenassociations/*", "zone_name": "drandrelo.com" }
+  ]
+}
